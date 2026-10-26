@@ -1,4 +1,4 @@
-0,1,2,3,4,5
+station_id,timestamp,humidity_relative_mean,precipitation_amount,pressure_vapor_mean,temperature_air_mean_2m
 02074,2000-01-01,0.92,1.5,6.4,1.8
 02074,2000-01-02,0.92,0.0,6.3,1.2
 02074,2000-01-03,0.89,0.0,5.1,-1.0
