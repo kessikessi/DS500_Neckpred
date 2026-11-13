@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kirchentellinsfurt water level</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Kirchentellinsfurt water-level forecast</h1>
+      <p id="status">Loading forecast…</p>
+      <canvas id="forecast-chart" aria-label="72-hour water-level forecast"></canvas>
+    </main>
+    <script>
+      fetch("/api/forecast").then(response => response.json()).then(data => {
+        const status = data.stale ? "Showing the last successful forecast (stale)." : "Forecast is current.";
+        document.querySelector("#status").textContent =
+          `${status} Generated ${new Date(data.generated_at).toLocaleString()}.`;
+        new Chart(document.querySelector("#forecast-chart"), {
+          type: "line",
+          data: { labels: data.points.map(point => new Date(point.timestamp).toLocaleString()),
+            datasets: [{ label: "Water level (cm)", data: data.points.map(point => point.water_level_cm),
+              borderColor: "#1769aa", tension: 0.2 }] },
+          options: { scales: { y: { title: { display: true, text: "cm" } } } }
+        });
+      }).catch(() => { document.querySelector("#status").textContent = "Forecast unavailable."; });
+    </script>
+  </body>
+</html>
