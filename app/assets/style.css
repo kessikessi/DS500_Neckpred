@@ -1,0 +1,152 @@
+/* Dash serves every file in app/assets automatically. Mobile first.
+   Visual style: serif uppercase headings, clean sans-serif body, strong blue
+   accent and light blue boxes, as common on local rowing club websites. */
+
+:root {
+  --bg: #f5f5f5;
+  --card: #ffffff;
+  --text: #222222;
+  --muted: #5f6368;
+  --border: #e6e6e6;
+  --blue: #127fc5;
+  --blue-dark: #0d5f94;
+  --blue-light: #aedaf5;
+  --blue-pale: #e7f3fb;
+  --hero: #1b2a36;
+  --ok: #2e8b3d;
+  --ok-bg: #e3f4e6;
+  --caution: #c77700;
+  --caution-bg: #fdf1dc;
+  --stop: #c62828;
+  --stop-bg: #fbe4e4;
+  --serif: "PT Serif", "Times New Roman", serif;
+  --sans: Raleway, "Helvetica Neue", Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+  /* Raleway defaults to old-style figures; use even, tabular digits for levels */
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Header band */
+.hero {
+  background:
+    linear-gradient(160deg, rgba(18, 127, 197, 0.35), rgba(0, 0, 0, 0) 60%),
+    var(--hero);
+  color: #fff;
+  padding: 36px 16px 28px;
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; }
+.hero-kicker {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+.hero h1 {
+  margin: 6px 0 18px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hero-banner {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  padding: 10px 22px;
+}
+
+.page { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+
+h2 {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.muted { color: var(--muted); margin: 4px 0; }
+.small { font-size: 0.85rem; }
+
+/* Alerts */
+.alert { padding: 10px 16px; margin-bottom: 16px; font-size: 0.95rem; border-left: 4px solid; }
+.alert-info { background: var(--blue-pale); border-color: var(--blue); color: var(--blue-dark); }
+.alert-warn { background: var(--caution-bg); border-color: var(--caution); color: #6b4100; }
+.alert-error { background: var(--stop-bg); border-color: var(--stop); color: #7f1d1d; }
+
+/* Grid of cards */
+.grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+.card {
+  background: var(--card);
+  border-top: 3px solid var(--blue);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  min-width: 0;
+}
+
+@media (min-width: 800px) {
+  .grid { grid-template-columns: 1fr 2fr; }
+  .chart-card { grid-column: 1 / -1; }
+  .weather-card { grid-column: 1 / -1; }
+  .hero h1 { font-size: 2.6rem; }
+}
+
+/* Status card with traffic light */
+#status-content { display: flex; gap: 20px; align-items: center; }
+.light { width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; }
+.light-ok { background: var(--ok); box-shadow: 0 0 0 8px var(--ok-bg); }
+.light-caution { background: var(--caution); box-shadow: 0 0 0 8px var(--caution-bg); }
+.light-stop { background: var(--stop); box-shadow: 0 0 0 8px var(--stop-bg); }
+.status-label { font-family: var(--serif); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.status-ok { color: var(--ok); }
+.status-caution { color: var(--caution); }
+.status-stop { color: var(--stop); }
+.level { font-size: 2.6rem; font-weight: 700; }
+.unit { color: var(--muted); }
+.trend { margin: 2px 0 4px; font-weight: 600; }
+
+/* Forecast tiles */
+.tiles { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+.tile { padding: 12px 8px; text-align: center; border-bottom: 4px solid; }
+.tile-ok { background: var(--ok-bg); border-color: var(--ok); }
+.tile-caution { background: var(--caution-bg); border-color: var(--caution); }
+.tile-stop { background: var(--stop-bg); border-color: var(--stop); }
+.tile-lead { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.tile-level { font-size: 1.35rem; font-weight: 700; }
+.tile-time, .tile-status { font-size: 0.8rem; }
+
+/* Chart */
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.chart-head h2 { margin-bottom: 8px; }
+.horizon-select { display: flex; }
+.horizon-select label {
+  cursor: pointer;
+  padding: 4px 12px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 0.9rem;
+  margin-left: -1px;
+}
+.horizon-select label:has(input:checked) { background: var(--blue); color: #fff; }
+.horizon-select input { display: none; }
+
+/* Weather placeholder in the light blue box style */
+.weather-card { background: var(--blue-light); border-top-color: var(--blue-dark); }
+.weather-card .muted { color: #1d3d52; }
+.weather-card h2 { color: var(--blue-dark); }
+
+.footer { margin-top: 24px; text-align: center; font-size: 0.85rem; }
