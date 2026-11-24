@@ -1,6 +1,10 @@
 # DS500_Neckpred
 Repository for the group Data-Science Project DS500. Topic: Predict the water level of the Neckar
 
+## Data storage
+
+Since the data files got too big, the data folder doesn't live on github any more. To run the jupyter notebooks, create a data folder in the parent directory of the project. Run the notebooks in the following order to populate the data folder needed to run models.ipynbm lstm.ipynb and correlations.ipynb: pegeldata.ipynb -> dwd_api.ipynb -> construct_data_final.ipynb
+
 ## Forecast application
 
 The `app/` package provides the model-agnostic core for a 72-hour Kirchentellinsfurt
